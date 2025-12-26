@@ -1,13 +1,27 @@
 import { CTABand } from "@/components/cta-band";
+import Image from "next/image";
 
 export default function Page() {
   return (
     <>
-      <h1 className="text-3xl font-semibold tracking-tight text-white">About Digital Support Systems, Inc.</h1>
-      <p className="mt-4 max-w-3xl text-slate-300">
-        Digital Support Systems, Inc. is a solutions-focused technology partner specializing in IP-based access control and modern IT infrastructure.
-        We help organizations design, deploy, and support systems that are secure, scalable, and built to perform in real-world environments.
-      </p>
+      <div className="grid gap-8 md:grid-cols-2 md:items-center">
+        <div>
+          <h1 className="text-3xl font-semibold tracking-tight text-white">About Digital Support Systems, Inc.</h1>
+          <p className="mt-4 text-slate-300">
+            Digital Support Systems, Inc. is a solutions-focused technology partner specializing in IP-based access control and modern IT infrastructure.
+            We help organizations design, deploy, and support systems that are secure, scalable, and built to perform in real-world environments.
+          </p>
+        </div>
+        <div className="relative aspect-video w-full overflow-hidden rounded-2xl md:aspect-square lg:aspect-video">
+          <Image
+            src="/images/modern_glass_building.png"
+            alt="Modern corporate office building"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      </div>
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
