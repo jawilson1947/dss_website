@@ -6,7 +6,7 @@ export default function Page() {
   return (
     <>
       <section className="rounded-2xl border border-slate-800 bg-slate-900 p-10">
-        <div className="mb-12 grid gap-8 md:grid-cols-2 md:items-center">
+        <div className="mb-12 grid gap-8 md:grid-cols-2">
           <div>
             <Image
               src="/images/dss-logo3.png"
@@ -23,7 +23,7 @@ export default function Page() {
               We deliver enterprise-grade Allegion / ISONAS IP-based access control and modern IT infrastructure for new and existing facilities—designed to be reliable, maintainable, and ready for growth.
             </p>
           </div>
-          <div className="relative aspect-video w-full overflow-hidden rounded-2xl md:aspect-square lg:aspect-video">
+          <div className="relative aspect-video w-full overflow-hidden rounded-2xl md:aspect-auto md:h-full">
             <Image
               src="/images/landing_glass_building.png"
               alt="Modern corporate headquarters"
