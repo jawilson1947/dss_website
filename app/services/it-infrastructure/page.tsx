@@ -18,7 +18,6 @@ export default function Page() {
             <li>Structured cabling systems planning</li>
             <li>Server, virtualization, and cloud integration</li>
             <li>Security-first infrastructure architecture</li>
-            <li>Security-first infrastructure architecture</li>
             <li>Documentation and lifecycle planning</li>
             <li>
               <Link href="/technology-plan" className="text-amber-600 hover:underline">
