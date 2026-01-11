@@ -1,7 +1,8 @@
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "Building Technology Plan | Digital Support Systems",
+    title: "New Building Technology Plan | Digital Support Systems",
     description: "Comprehensive guide to creating a technology master plan for new construction projects."
 };
 
@@ -9,10 +10,18 @@ export default function TechnologyPlanPage() {
     return (
         <div className="space-y-12">
             <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">Building Technology Plan</h1>
+                <h1 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">New Building Technology Plan</h1>
                 <p className="text-xl text-slate-400">
                     A strategic framework for integrating advanced technology infrastructure into modern construction projects.
                 </p>
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 my-8">
+                    <Image
+                        src="/images/technology-plan-hero.png"
+                        alt="Digital blueprint of a modern smart building"
+                        fill
+                        className="object-cover"
+                    />
+                </div>
             </div>
 
             <div className="grid gap-8 lg:grid-cols-[1fr_250px]">
@@ -94,6 +103,14 @@ export default function TechnologyPlanPage() {
                     {/* 4.0 IT Infrastructure */}
                     <section className="space-y-4">
                         <h2 className="text-2xl font-semibold text-white">4.0 IT Infrastructure</h2>
+                        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 mb-6">
+                            <Image
+                                src="/images/it-infrastructure.png"
+                                alt="Modern data center corridor"
+                                fill
+                                className="object-cover"
+                            />
+                        </div>
                         <div className="grid gap-6 md:grid-cols-2">
                             <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
                                 <h3 className="mb-3 text-lg font-medium text-amber-500">4.1 Deployment Objectives</h3>

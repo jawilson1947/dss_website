@@ -1,4 +1,5 @@
 import { CTABand } from "@/components/cta-band";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -17,7 +18,13 @@ export default function Page() {
             <li>Structured cabling systems planning</li>
             <li>Server, virtualization, and cloud integration</li>
             <li>Security-first infrastructure architecture</li>
+            <li>Security-first infrastructure architecture</li>
             <li>Documentation and lifecycle planning</li>
+            <li>
+              <Link href="/technology-plan" className="text-amber-600 hover:underline">
+                New Building Information Technology plan
+              </Link>
+            </li>
           </ul>
         </div>
         <div className="rounded-2xl border border-slate-200 p-6">
