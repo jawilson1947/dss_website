@@ -201,7 +201,7 @@ export default function TechnologyPlanPage() {
                             <ul>
                                 <li><strong>Electrical Grid Resilience:</strong> Implementation of backup generators capable of sustaining critical loads for 24+ hours. Comprehensive circuit analysis to prevent overloads.</li>
                                 <li><strong>System Hardening:</strong> Physical wire hardening techniques to prevent tampering and environmental damage.</li>
-                                <li><strong>Environmental Monitroing:</strong> IoT sensors for temperature, humidity, and water leak detection in critical infrastructure zones.</li>
+                                <li><strong>Environmental Monitoring:</strong> IoT sensors for temperature, humidity, and water leak detection in critical infrastructure zones.</li>
                             </ul>
                         </div>
                     </section>
@@ -214,19 +214,11 @@ export default function TechnologyPlanPage() {
                             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-400">Downloads</h3>
                             <ul className="space-y-3">
                                 <li>
-                                    <a href="/docs/Building Technology Plan.mm" className="flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 hover:underline">
+                                    <a href="/docs/Building_Technology_Plan.pdf" className="flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 hover:underline">
                                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
-                                        Download Mindmap
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" className="flex items-center gap-2 text-sm text-slate-500 cursor-not-allowed">
-                                        <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                                        </svg>
-                                        Full PDF Report (Coming Soon)
+                                        Download Mind Map
                                     </a>
                                 </li>
                             </ul>
