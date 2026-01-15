@@ -14,6 +14,17 @@ const cases = [
     ]
   },
   {
+    title: "Jenzabar Application Data Interface (JADI)",
+    summary: "Seamless integration and data management for higher education ERP systems.",
+    href: "/case-studies/jenzabar-application-data-interface",
+    details: [
+      "Challenge: Integrating legacy ERP data with modern web applications.",
+      "Solution: Custom middleware interface (JADI) for secure data exchange.",
+      "Technology: Jenzabar, SQL, API Development",
+      "Outcome: Real-time data synchronization and improved administrative efficiency."
+    ],
+  },
+  {
     title: "Multi-building Access Control Rollout",
     summary: "IP-based door control architecture with scalable deployment planning and clear documentation.",
     details: [
