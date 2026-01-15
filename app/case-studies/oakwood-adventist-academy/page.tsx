@@ -173,7 +173,7 @@ export default function OakwoodCaseStudyPage() {
                             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-slate-400">Reference Documents</h3>
                             <ul className="space-y-3">
                                 <li>
-                                    <a href="/docs/OAA_Building_Technology_Plan.pdf" className="flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 hover:underline">
+                                    <a href="/docs/oaa-technology-plan.pdf" className="flex items-center gap-2 text-sm text-amber-500 hover:text-amber-400 hover:underline">
                                         <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
