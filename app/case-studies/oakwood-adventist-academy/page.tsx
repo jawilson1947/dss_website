@@ -14,7 +14,7 @@ export default function OakwoodCaseStudyPage() {
                 <p className="text-xl text-slate-400">
                     This High School Building opened on August 2020 is the most technologically advanced building on the Oakwood University Campus.
                     This State- of - the - art facility is designed for full automation, distance learning, internodal fiber, and cloud - based access control to name a few.
-                    It employs Extreme's  Virtual Campus for it's corporate network with a dedicated broadband connection just for WiFi.
+                    It employs Extreme Network's  Virtual Campus for it's corporate network with a dedicated broadband connection for WiFi.
                 </p>
 
                 {/* Placeholder for Hero Image - using a generic placeholder if specific one isn't available, or can use a gradient until an image is provided */}
