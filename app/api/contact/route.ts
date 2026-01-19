@@ -7,6 +7,7 @@ type Payload = {
     message: string;
     company?: string;
     phone?: string;
+    location?: string;
     website?: string;
     // simple spam trap:
     honey?: string; // should be empty
@@ -60,6 +61,7 @@ export async function POST(req: Request) {
             `Email: ${email}`,
             body.company ? `Company: ${body.company}` : null,
             body.phone ? `Phone: ${body.phone}` : null,
+            body.location ? `Location: ${body.location}` : null,
             body.website ? `Website: ${body.website}` : null,
             ``,
             `Message:`,
@@ -76,6 +78,7 @@ export async function POST(req: Request) {
         <p><b>Email:</b> ${escapeHtml(email)}</p>
         ${body.company ? `<p><b>Company:</b> ${escapeHtml(body.company)}</p>` : ""}
         ${body.phone ? `<p><b>Phone:</b> ${escapeHtml(body.phone)}</p>` : ""}
+        ${body.location ? `<p><b>Location:</b> ${escapeHtml(body.location)}</p>` : ""}
         ${body.website ? `<p><b>Website:</b> ${escapeHtml(body.website)}</p>` : ""}
         <hr/>
         <p><b>Message:</b></p>

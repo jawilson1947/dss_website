@@ -25,12 +25,12 @@ const cases = [
     ],
   },
   {
-    title: "Multi-building Access Control Rollout",
-    summary: "IP-based door control architecture with scalable deployment planning and clear documentation.",
+    title: "iPad Classroom Scheduler Project",
+    summary: "____________________________________________________________",
     details: [
       "Challenge: ______________________________",
       "Solution: _______________________________",
-      "Technology: Allegion / ISONAS, network design",
+      "Technology: _____________________________",
       "Outcome: ________________________________"
     ]
   },
