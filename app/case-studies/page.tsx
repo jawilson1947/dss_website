@@ -18,7 +18,7 @@ const cases = [
     summary: "Seamless integration and data management for higher education ERP systems.",
     href: "/case-studies/jenzabar-application-data-interface",
     details: [
-      "Challenge: Integrating legacy ERP data with modern web applications.",
+      "Challenge: Enhance AR functionality and integrate Asterisk soft PBX with Student Billing module.",
       "Solution: Custom middleware interface (JADI) for secure data exchange.",
       "Technology: Jenzabar, SQL, API Development",
       "Outcome: Real-time data synchronization and improved administrative efficiency."
@@ -28,7 +28,7 @@ const cases = [
     title: "iPad Classroom Scheduler Project",
     summary: "____________________________________________________________",
     details: [
-      "Challenge: ______________________________",
+      "Challenge: Develop centralized wall mounted classroom information display system for tablets",
       "Solution: _______________________________",
       "Technology: _____________________________",
       "Outcome: ________________________________"
