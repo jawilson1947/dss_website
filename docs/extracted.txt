@@ -1,0 +1,105 @@
+iPad-Based Classroom Scheduling System
+Enterprise-Grade Room Management for Modern Educational Facilities
+Executive Summary
+Digital Support Systems designed and deployed a fully integrated, cloud-connected classroom scheduling platform built specifically for wall-mounted iPads in educational environments. The solution combines native iPad development, cloud infrastructure, and real-time database management to deliver a secure, scalable, and intuitive scheduling experience.
+The system replaces paper schedules and disconnected booking tools with a modern, touch-enabled interface that provides instant room availability, booking control, and administrative oversight.
+The Challenge
+Educational institutions often struggle with:
+Double-booked classrooms
+Lack of real-time visibility
+Manual scheduling conflicts
+Outdated paper-based systems
+No centralized management
+Poor user adoption due to complex interfaces
+The goal was to design a solution that was:
+Simple for users
+Powerful for administrators
+Secure and cloud-based
+Scalable across multiple buildings
+Optimized for wall-mounted iPads
+The Solution
+Digital Support Systems built a full-stack, enterprise-ready system consisting of:
+1️⃣ Native iPad and Android Interface
+Built using Apple’s SwiftUI  and Android Jetpack Compose frameworks
+Optimized for kiosk mode
+Touch-friendly interface
+Real-time availability display
+Color-coded room status indicators
+Instant booking capability
+The application runs securely on wall-mounted iPads and supports Guided Access / kiosk deployment for public environments.
+2️⃣ Cloud-Based Admin Portal (Next.js + React)
+Web-based administrative dashboard
+Built with Next.js and React
+Secure authentication layer
+Event management and reporting tools
+Multi-room configuration
+User role management
+Administrators can manage bookings remotely from any browser.
+3️⃣ Backend Architecture
+Node.js API layer
+REST-based architecture
+Real-time database updates
+Conflict detection logic
+Automated email notifications
+4️⃣ Database Infrastructure
+MySQL (Google Cloud SQL)
+Structured relational schema
+Secure encrypted connections
+Scalable cloud-hosted environment
+5️⃣ Email & Notification Engine
+SendGrid integration
+Booking confirmations
+Cancellation notifications
+Administrative alerts
+Technical Stack
+Layer
+Technology
+iPad App
+SwiftUI
+Web Portal
+Next.js + React
+Styling
+Tailwind CSS
+Backend
+Node.js (API Routes)
+Database
+MySQL (Cloud SQL)
+Hosting
+Vercel
+Email
+SendGrid
+CI/CD
+GitHub
+Architecture Overview
+Wall-Mounted iPad        ↓Secure API (Next.js / Node.js)        ↓Cloud SQL Database        ↓Email Notification System
+Security & Reliability
+Environment-based secret management
+Role-based authentication
+Cloud-hosted infrastructure
+HTTPS encryption
+Controlled kiosk deployment
+The system was designed with enterprise-grade security and long-term scalability in mind.
+Results
+✔ Eliminated double-bookings✔ Increased room utilization visibility✔ Reduced administrative overhead✔ Modernized facility experience✔ Scalable across campuses
+Vercel → Frontend + API
+Google Cloud SQL → Database
+SendGrid → Email delivery
+GitHub → CI/CD pipeline
+🔐 Security & Auth
+Likely using NextAuth.js
+Environment secrets for:
+Database access
+JWT signing
+Email API keys
+🧱 High-Level Architecture
+iPad App (SwiftUI)        ↓Next.js API (Node)        ↓MySQL (Cloud SQL)        ↓SendGrid (Email)
+🎯 Why This Is a Strong Stack
+Enterprise-grade
+Cloud scalable
+Easy to maintain
+Modern UI/UX
+Supports kiosk deployment
+Secure authentication
+API-based architecture
+Top of Form
+Bottom of Form

@@ -26,12 +26,13 @@ const cases = [
   },
   {
     title: "iPad Classroom Scheduler Project",
-    summary: "____________________________________________________________",
+    summary: "Cloud-connected, centrally managed classroom scheduling platform for wall-mounted iPads.",
+    href: "/case-studies/ipad-classroom-scheduler",
     details: [
       "Challenge: Develop centralized wall mounted classroom information display system for tablets",
-      "Solution: _______________________________",
-      "Technology: _____________________________",
-      "Outcome: ________________________________"
+      "Solution: Full-stack system with native iPad UI, Next.js admin portal, and MySQL backend.",
+      "Technology: SwiftUI, Next.js, Node.js, MySQL (Cloud SQL), Vercel",
+      "Outcome: Eliminated double-bookings and modernized the facility experience."
     ]
   },
   {
