@@ -36,7 +36,7 @@ const cases = [
     ]
   },
   {
-    title: "Infrastructure Modernization for Secure Systems",
+    title: "Alexa controled \"Zoom Room\" by Shure Technologies",
     summary: "Network and cabling modernization to support security systems and business operations.",
     details: [
       "Challenge: ______________________________",
