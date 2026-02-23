@@ -159,3 +159,5 @@ out
 .env
 .env.*
 temp
+docs
+

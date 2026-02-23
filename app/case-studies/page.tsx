@@ -36,7 +36,7 @@ const cases = [
     ]
   },
   {
-    title: "Alexa controled \"Zoom Room\" by Shure Technologies",
+    title: "Alexa controlled \"Zoom Room\" by Shure Technologies",
     summary: "Network-centric AV-over-IP Zoom Room built around Dante-enabled audio and AI-driven camera systems.",
     href: "/case-studies/alexa-zoom-room",
     details: [

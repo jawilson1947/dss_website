@@ -3,16 +3,16 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
     title: "iPad Classroom Scheduler Case Study | Digital Support Systems",
-    description: "Enterprise-Grade Room Management for Modern Educational Facilities using iPad."
+    description: "Enterprise-Grade Room Management for Modern Educational Facilities using iPad & Android tablets."
 };
 
 export default function IPadClassroomSchedulerPage() {
     return (
         <div className="space-y-12">
             <div className="space-y-4">
-                <h1 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">iPad-Based Classroom Scheduling System</h1>
+                <h1 className="text-4xl font-bold tracking-tight text-white lg:text-5xl">Tablet-Based Classroom Scheduling System</h1>
                 <p className="text-xl text-slate-400">
-                    Enterprise-Grade Room Management for Modern Educational Facilities. Digital Support Systems designed and deployed a fully integrated, cloud-connected classroom scheduling platform built specifically for wall-mounted iPads.
+                    Enterprise-Grade Room Management for Modern Educational Facilities. Digital Support Systems designed and deployed a fully integrated, cloud-connected classroom scheduling platform built specifically for wall-mounted IOS iPads and Android tablets.
                 </p>
 
                 {/* Hero Image */}
@@ -36,7 +36,7 @@ export default function IPadClassroomSchedulerPage() {
                         <h2 className="text-2xl font-semibold text-white">Project Overview</h2>
                         <div className="space-y-4 text-slate-300">
                             <p>
-                                Digital Support Systems designed and deployed a fully integrated, cloud-connected classroom scheduling platform built specifically for wall-mounted iPads in educational environments. The solution combines native iPad development, cloud infrastructure, and real-time database management to deliver a secure, scalable, and intuitive scheduling experience.
+                                Digital Support Systems designed and deployed a fully integrated, cloud-connected classroom scheduling platform built specifically for wall-mounted tablets in educational environments. The solution combines native iPad/Android development, cloud infrastructure, and real-time database management to deliver a secure, scalable, and intuitive scheduling experience.
                             </p>
                             <p>
                                 The system replaces paper schedules and disconnected booking tools with a modern, touch-enabled interface that provides instant room availability, booking control, and administrative oversight.
