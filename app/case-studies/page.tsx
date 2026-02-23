@@ -37,12 +37,13 @@ const cases = [
   },
   {
     title: "Alexa controled \"Zoom Room\" by Shure Technologies",
-    summary: "Network and cabling modernization to support security systems and business operations.",
+    summary: "Network-centric AV-over-IP Zoom Room built around Dante-enabled audio and AI-driven camera systems.",
+    href: "/case-studies/alexa-zoom-room",
     details: [
-      "Challenge: ______________________________",
-      "Solution: _______________________________",
-      "Technology: Switching, VLAN design, fiber",
-      "Outcome: ________________________________"
+      "Challenge: Deliver enterprise-grade hybrid meeting capabilities with broadcast-quality audio.",
+      "Solution: Integrated Zoom Room using Shure IntelliMix DSP, Poly E70 4K camera, and dual 55\" displays.",
+      "Technology: Shure Dante Ecosystem, Poly E70, Zoom Room PC, iPad Controller",
+      "Outcome: Professional visual presence with one-touch seamless hybrid collaboration."
     ]
   }
 ];
