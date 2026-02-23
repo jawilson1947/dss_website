@@ -155,6 +155,40 @@ export default function IPadClassroomSchedulerPage() {
                             </ul>
                         </div>
                     </section>
+
+                    {/* Tablet Wall Mount Suppliers */}
+                    <section className="space-y-4">
+                        <h2 className="text-2xl font-semibold text-white">Tablet wall mount suppliers</h2>
+                        <div className="space-y-4 text-slate-300">
+                            <ul className="list-disc pl-6 text-slate-400 space-y-2">
+                                <li>
+                                    <a href="https://www.bosstab.com/tablet-wall" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">
+                                        Bosstab Tablet Wall Mounts
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.maclocks.com/space-ipad-mini-air-pro-enclosure-wall-mount.html" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">
+                                        Maclocks by Compulocks
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://hecklerdesign.com/collections/ipad-stands-mounts" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">
+                                        Heckler Design
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.vidabox.com/kiosks/vidamount-secure-fixed-tilted-wall-ipad-10th-gen-10-9-tablet-enclosure-mount-black.html" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">
+                                        Vidabox Kiosks
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.aliexpress.us/w/wholesale-ipad-wall-mount.html" target="_blank" rel="noopener noreferrer" className="text-amber-500 hover:underline">
+                                        AliExpress
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
 
                 {/* Sidebar / Technical Stack */}
