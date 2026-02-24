@@ -104,7 +104,7 @@ export default function AlexaZoomRoomPage() {
                         <h2 className="text-2xl font-semibold text-white">Project Outcome</h2>
                         <div className="space-y-4 text-slate-300">
                             <p>
-                                Oakwood University Church implemented a fully integrated Zoom Room solution designed to deliver enterprise-grade hybrid meeting capabilities. The system features a Poly E70 4K intelligent camera, dual 55-inch displays, and a Dante-based Shure digital audio ecosystem powered by the IntelliMix P300 processor. Controlled via an intuitive iPad interface, the solution enables seamless hybrid collaboration while maintaining broadcast-quality audio and professional visual presence.
+                                Oakwood University Church, Huntsville, Alabama implemented a fully integrated Zoom Room solution designed to deliver enterprise-grade hybrid meeting capabilities. The system features a Poly E70 4K intelligent camera, dual 55-inch displays, and a Dante-based Shure digital audio ecosystem powered by the IntelliMix P300 processor. Controlled via an intuitive iPad interface, the solution enables seamless hybrid collaboration while maintaining broadcast-quality audio and professional visual presence.
                             </p>
                         </div>
                     </section>
