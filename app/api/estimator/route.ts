@@ -1,44 +1,6 @@
 import { NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 
-export type EstimatorPayload = {
-    // Contact info
-    contactName: string;
-    contactEmail: string;
-    contactPhone?: string;
-    contactCompany?: string;
-
-    // 1. External Doors
-    extSingle: number;
-    extDouble: number;
-    extAutomatic: number;
-
-    // 2. Internal Doors
-    intSingle: number;
-    intDouble: number;
-    intAutomatic: number;
-
-    // 3. Specialized Access
-    motorizedGates: number;
-    elevators: number;
-    otherSpecialized: string;
-
-    // 4. Calculated totals
-    totalDoors: number;
-    totalDevices: number;
-
-    // 4. License
-    addCloudLicense: boolean;
-
-    // 5. Maintenance plan
-    maintenancePlan: string;
-
-    // 6. Hardware add-ons (auto-required when any double doors > 0)
-    needsMagLocks: boolean;
-    needsMotionSensor: boolean;
-    needsRexDevice: boolean;
-};
-
 function escapeHtml(s: string) {
     return s
         .replaceAll("&", "&amp;")
@@ -53,9 +15,19 @@ function row(label: string, value: string | number | boolean) {
         typeof value === "boolean" ? (value ? "Yes" : "No") : String(value);
     return `<tr><td style="padding:4px 12px 4px 0;color:#64748b;white-space:nowrap">${escapeHtml(
         label
-    )}</td><td style="padding:4px 0;font-weight:600">${escapeHtml(
-        display
-    )}</td></tr>`;
+    )}</td><td style="padding:4px 0;font-weight:600">${escapeHtml(display)}</td></tr>`;
+}
+
+function str(fd: FormData, key: string) {
+    return ((fd.get(key) as string) ?? "").trim();
+}
+
+function num(fd: FormData, key: string) {
+    return parseInt((fd.get(key) as string) ?? "0") || 0;
+}
+
+function bool(fd: FormData, key: string) {
+    return (fd.get(key) as string) === "true";
 }
 
 export async function POST(req: Request) {
@@ -76,13 +48,53 @@ export async function POST(req: Request) {
                 { status: 500 }
             );
 
-        const d = (await req.json()) as EstimatorPayload;
+        // Parse multipart form data
+        const fd = await req.formData();
 
-        if (!d.contactName?.trim() || !d.contactEmail?.trim()) {
+        const contactName = str(fd, "contactName");
+        const contactEmail = str(fd, "contactEmail");
+
+        if (!contactName || !contactEmail) {
             return NextResponse.json(
                 { ok: false, error: "Name and email are required." },
                 { status: 400 }
             );
+        }
+
+        const contactPhone = str(fd, "contactPhone");
+        const contactCompany = str(fd, "contactCompany");
+        const extSingle = num(fd, "extSingle");
+        const extDouble = num(fd, "extDouble");
+        const extAutomatic = num(fd, "extAutomatic");
+        const intSingle = num(fd, "intSingle");
+        const intDouble = num(fd, "intDouble");
+        const intAutomatic = num(fd, "intAutomatic");
+        const motorizedGates = num(fd, "motorizedGates");
+        const elevators = num(fd, "elevators");
+        const otherSpecialized = str(fd, "otherSpecialized");
+        const totalDoors = num(fd, "totalDoors");
+        const totalDevices = num(fd, "totalDevices");
+        const addCloudLicense = bool(fd, "addCloudLicense");
+        const maintenancePlan = str(fd, "maintenancePlan");
+        const needsMagLocks = bool(fd, "needsMagLocks");
+        const needsMotionSensor = bool(fd, "needsMotionSensor");
+        const needsRexDevice = bool(fd, "needsRexDevice");
+
+        // ── Floor plan attachment (optional) ──────────────────────────────
+        const floorPlanFile = fd.get("floorPlan") as File | null;
+        let attachments: sgMail.MailDataRequired["attachments"] = [];
+
+        if (floorPlanFile && floorPlanFile.size > 0) {
+            const arrayBuffer = await floorPlanFile.arrayBuffer();
+            const base64Content = Buffer.from(arrayBuffer).toString("base64");
+            attachments = [
+                {
+                    content: base64Content,
+                    filename: floorPlanFile.name,
+                    type: floorPlanFile.type || "application/octet-stream",
+                    disposition: "attachment",
+                },
+            ];
         }
 
         sgMail.setApiKey(apiKey);
@@ -94,52 +106,59 @@ export async function POST(req: Request) {
 
   <h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px">Contact Information</h3>
   <table><tbody>
-    ${row("Name", d.contactName)}
-    ${row("Email", d.contactEmail)}
-    ${d.contactPhone ? row("Phone", d.contactPhone) : ""}
-    ${d.contactCompany ? row("Company", d.contactCompany) : ""}
+    ${row("Name", contactName)}
+    ${row("Email", contactEmail)}
+    ${contactPhone ? row("Phone", contactPhone) : ""}
+    ${contactCompany ? row("Company", contactCompany) : ""}
   </tbody></table>
 
   <h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-top:20px">1. External Doors</h3>
   <table><tbody>
-    ${row("Single doors", d.extSingle)}
-    ${row("Double doors", d.extDouble)}
-    ${row("Automatic doors", d.extAutomatic)}
+    ${row("Single doors", extSingle)}
+    ${row("Double doors", extDouble)}
+    ${row("Automatic doors", extAutomatic)}
   </tbody></table>
 
   <h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-top:20px">2. Internal Doors</h3>
   <table><tbody>
-    ${row("Single doors", d.intSingle)}
-    ${row("Double doors", d.intDouble)}
-    ${row("Automatic doors", d.intAutomatic)}
+    ${row("Single doors", intSingle)}
+    ${row("Double doors", intDouble)}
+    ${row("Automatic doors", intAutomatic)}
   </tbody></table>
 
   <h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-top:20px">3. Specialized Access</h3>
   <table><tbody>
-    ${row("Motorized gates", d.motorizedGates)}
-    ${row("Elevators", d.elevators)}
-    ${d.otherSpecialized ? row("Other (description)", d.otherSpecialized) : ""}
+    ${row("Motorized gates", motorizedGates)}
+    ${row("Elevators", elevators)}
+    ${otherSpecialized ? row("Other (description)", otherSpecialized) : ""}
   </tbody></table>
 
   <h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-top:20px">4. Project Totals &amp; Licensing</h3>
   <table><tbody>
-    ${row("Total doors", d.totalDoors)}
-    ${row("Total devices (doors + specialized)", d.totalDevices)}
-    ${row("ISONAS Pure Access Cloud License", d.addCloudLicense)}
+    ${row("Total doors", totalDoors)}
+    ${row("Total devices (doors + specialized)", totalDevices)}
+    ${row("ISONAS Pure Access Cloud License", addCloudLicense)}
   </tbody></table>
 
   <h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-top:20px">5. Annual Maintenance Plan</h3>
   <table><tbody>
-    ${row("Selected plan", d.maintenancePlan || "None")}
+    ${row("Selected plan", maintenancePlan || "None")}
   </tbody></table>
 
-  ${d.needsMagLocks || d.needsMotionSensor || d.needsRexDevice
+  ${needsMagLocks || needsMotionSensor || needsRexDevice
                 ? `<h3 style="border-bottom:1px solid #e2e8f0;padding-bottom:4px;margin-top:20px">6. Required Hardware Add-Ons (Double Doors)</h3>
   <table><tbody>
-    ${row("Magnetic locks", d.needsMagLocks)}
-    ${row("Motion sensors", d.needsMotionSensor)}
-    ${row("REX devices", d.needsRexDevice)}
+    ${row("Magnetic locks", needsMagLocks)}
+    ${row("Motion sensors", needsMotionSensor)}
+    ${row("REX devices", needsRexDevice)}
   </tbody></table>`
+                : ""
+            }
+
+  ${floorPlanFile && floorPlanFile.size > 0
+                ? `<p style="margin-top:20px;padding:12px 16px;background:#f1f5f9;border-radius:8px;font-size:14px">
+          📎 <strong>Floor plan attached:</strong> ${escapeHtml(floorPlanFile.name)}
+        </p>`
                 : ""
             }
 </div>`;
@@ -147,40 +166,46 @@ export async function POST(req: Request) {
         const text = [
             "Access Control Project Estimate Request",
             "",
-            `Name: ${d.contactName}`,
-            `Email: ${d.contactEmail}`,
-            d.contactPhone ? `Phone: ${d.contactPhone}` : null,
-            d.contactCompany ? `Company: ${d.contactCompany}` : null,
+            `Name: ${contactName}`,
+            `Email: ${contactEmail}`,
+            contactPhone ? `Phone: ${contactPhone}` : null,
+            contactCompany ? `Company: ${contactCompany}` : null,
             "",
             "--- External Doors ---",
-            `Single: ${d.extSingle}  Double: ${d.extDouble}  Automatic: ${d.extAutomatic}`,
+            `Single: ${extSingle}  Double: ${extDouble}  Automatic: ${extAutomatic}`,
             "",
             "--- Internal Doors ---",
-            `Single: ${d.intSingle}  Double: ${d.intDouble}  Automatic: ${d.intAutomatic}`,
+            `Single: ${intSingle}  Double: ${intDouble}  Automatic: ${intAutomatic}`,
             "",
             "--- Specialized Access ---",
-            `Motorized gates: ${d.motorizedGates}  Elevators: ${d.elevators}`,
-            d.otherSpecialized ? `Other: ${d.otherSpecialized}` : null,
+            `Motorized gates: ${motorizedGates}  Elevators: ${elevators}`,
+            otherSpecialized ? `Other: ${otherSpecialized}` : null,
             "",
             "--- Totals ---",
-            `Total doors: ${d.totalDoors}  Total devices: ${d.totalDevices}`,
-            `Cloud License: ${d.addCloudLicense ? "Yes" : "No"}`,
-            `Maintenance plan: ${d.maintenancePlan || "None"}`,
-            d.needsMagLocks || d.needsMotionSensor || d.needsRexDevice
-                ? `Hardware add-ons: Mag Locks=${d.needsMagLocks}, Motion Sensors=${d.needsMotionSensor}, REX=${d.needsRexDevice}`
+            `Total doors: ${totalDoors}  Total devices: ${totalDevices}`,
+            `Cloud License: ${addCloudLicense ? "Yes" : "No"}`,
+            `Maintenance plan: ${maintenancePlan || "None"}`,
+            needsMagLocks || needsMotionSensor || needsRexDevice
+                ? `Hardware add-ons: Mag Locks=${needsMagLocks}, Motion Sensors=${needsMotionSensor}, REX=${needsRexDevice}`
+                : null,
+            floorPlanFile && floorPlanFile.size > 0
+                ? `Floor plan attached: ${floorPlanFile.name}`
                 : null,
         ]
             .filter(Boolean)
             .join("\n");
 
-        await sgMail.send({
+        const msg: sgMail.MailDataRequired = {
             to: toEmail,
             from: fromEmail,
-            replyTo: d.contactEmail,
-            subject: `Access Control Estimate Request from ${d.contactName}`,
+            replyTo: contactEmail,
+            subject: `Access Control Estimate Request from ${contactName}`,
             text,
             html,
-        });
+            ...(attachments.length > 0 ? { attachments } : {}),
+        };
+
+        await sgMail.send(msg);
 
         return NextResponse.json({ ok: true }, { status: 200 });
     } catch (err: any) {

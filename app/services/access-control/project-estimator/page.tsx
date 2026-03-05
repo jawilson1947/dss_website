@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 
 // ─── Maintenance Plan Tiers ──────────────────────────────────────────────────
 const MAINTENANCE_PLANS = [
@@ -147,6 +147,48 @@ export default function ProjectEstimatorPage() {
     // ── 5. Maintenance
     const [maintenancePlan, setMaintenancePlan] = useState("none");
 
+    // ── Floor plan upload
+    const [floorPlan, setFloorPlan] = useState<File | null>(null);
+    const [dragOver, setDragOver] = useState(false);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const handleFileDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setDragOver(false);
+        const file = e.dataTransfer.files?.[0];
+        if (file) validateAndSetFile(file);
+    };
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (file) validateAndSetFile(file);
+    };
+
+    const validateAndSetFile = (file: File) => {
+        const maxMb = 10;
+        const allowed = [
+            "application/pdf",
+            "image/png",
+            "image/jpeg",
+            "image/jpg",
+            "image/gif",
+            "image/webp",
+            "application/vnd.ms-powerpoint",
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+            "application/msword",
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ];
+        if (file.size > maxMb * 1024 * 1024) {
+            alert(`File must be smaller than ${maxMb} MB.`);
+            return;
+        }
+        if (!allowed.includes(file.type)) {
+            alert("Please upload a PDF, image (PNG/JPG/GIF/WebP), or Office document.");
+            return;
+        }
+        setFloorPlan(file);
+    };
+
     // ── Submission state
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
     const [errorMessage, setErrorMessage] = useState("");
@@ -187,36 +229,34 @@ export default function ProjectEstimatorPage() {
         setStatus("submitting");
         setErrorMessage("");
 
-        const payload = {
-            contactName,
-            contactEmail,
-            contactPhone,
-            contactCompany,
-            extSingle,
-            extDouble,
-            extAutomatic,
-            intSingle,
-            intDouble,
-            intAutomatic,
-            motorizedGates,
-            elevators,
-            otherSpecialized,
-            totalDoors,
-            totalDevices,
-            addCloudLicense,
-            maintenancePlan:
-                MAINTENANCE_PLANS.find((p) => p.id === maintenancePlan)?.label ?? maintenancePlan,
-            needsMagLocks: hasDoubleDoors,
-            needsMotionSensor: hasDoubleDoors,
-            needsRexDevice: hasDoubleDoors,
-        };
+        const fd = new FormData();
+        fd.append("contactName", contactName);
+        fd.append("contactEmail", contactEmail);
+        fd.append("contactPhone", contactPhone);
+        fd.append("contactCompany", contactCompany);
+        fd.append("extSingle", String(extSingle));
+        fd.append("extDouble", String(extDouble));
+        fd.append("extAutomatic", String(extAutomatic));
+        fd.append("intSingle", String(intSingle));
+        fd.append("intDouble", String(intDouble));
+        fd.append("intAutomatic", String(intAutomatic));
+        fd.append("motorizedGates", String(motorizedGates));
+        fd.append("elevators", String(elevators));
+        fd.append("otherSpecialized", otherSpecialized);
+        fd.append("totalDoors", String(totalDoors));
+        fd.append("totalDevices", String(totalDevices));
+        fd.append("addCloudLicense", String(addCloudLicense));
+        fd.append(
+            "maintenancePlan",
+            MAINTENANCE_PLANS.find((p) => p.id === maintenancePlan)?.label ?? maintenancePlan
+        );
+        fd.append("needsMagLocks", String(hasDoubleDoors));
+        fd.append("needsMotionSensor", String(hasDoubleDoors));
+        fd.append("needsRexDevice", String(hasDoubleDoors));
+        if (floorPlan) fd.append("floorPlan", floorPlan, floorPlan.name);
 
         try {
-            const res = await fetch("/api/estimator", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload),
-            });
+            const res = await fetch("/api/estimator", { method: "POST", body: fd });
             const data = await res.json();
             if (!res.ok) throw new Error(data.error || "Something went wrong");
             setStatus("success");
@@ -377,8 +417,8 @@ export default function ProjectEstimatorPage() {
                                 <div
                                     key={item.label}
                                     className={`rounded-xl p-4 ${item.highlight
-                                            ? "bg-amber-500/20 border border-amber-500/40"
-                                            : "bg-slate-900 border border-slate-700"
+                                        ? "bg-amber-500/20 border border-amber-500/40"
+                                        : "bg-slate-900 border border-slate-700"
                                         }`}
                                 >
                                     <div
@@ -433,8 +473,8 @@ export default function ProjectEstimatorPage() {
                                 <label
                                     key={plan.id}
                                     className={`relative flex cursor-pointer flex-col rounded-xl border p-5 transition-all ${isSelected
-                                            ? "border-amber-500 bg-amber-500/10"
-                                            : "border-slate-700 bg-slate-800/60 hover:border-slate-600"
+                                        ? "border-amber-500 bg-amber-500/10"
+                                        : "border-slate-700 bg-slate-800/60 hover:border-slate-600"
                                         }`}
                                 >
                                     <input
@@ -553,6 +593,62 @@ export default function ProjectEstimatorPage() {
                                 <>
                                     <span className="text-slate-500">Hardware add-ons</span>
                                     <span className="text-amber-400 font-medium">Mag locks, Motion sensors, REX</span>
+                                </>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Floor Plan Upload */}
+                    <div className="mb-6">
+                        <label className="block text-sm font-medium text-slate-300 mb-2">
+                            Floor Plan{" "}
+                            <span className="text-slate-500 font-normal">(optional — PDF, image, or Office doc, max 10 MB)</span>
+                        </label>
+                        <div
+                            onClick={() => fileInputRef.current?.click()}
+                            onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                            onDragLeave={() => setDragOver(false)}
+                            onDrop={handleFileDrop}
+                            className={`relative flex cursor-pointer flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed p-8 text-center transition-colors ${dragOver
+                                    ? "border-amber-500 bg-amber-500/10"
+                                    : floorPlan
+                                        ? "border-green-500/60 bg-green-500/5"
+                                        : "border-slate-700 bg-slate-800/60 hover:border-slate-500"
+                                }`}
+                        >
+                            <input
+                                ref={fileInputRef}
+                                type="file"
+                                accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.ppt,.pptx,.doc,.docx"
+                                onChange={handleFileChange}
+                                className="sr-only"
+                            />
+                            {floorPlan ? (
+                                <>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <div>
+                                        <p className="font-medium text-green-400">{floorPlan.name}</p>
+                                        <p className="text-xs text-slate-500 mt-0.5">{(floorPlan.size / 1024).toFixed(1)} KB</p>
+                                    </div>
+                                    <button
+                                        type="button"
+                                        onClick={(e) => { e.stopPropagation(); setFloorPlan(null); if (fileInputRef.current) fileInputRef.current.value = ""; }}
+                                        className="text-xs text-slate-400 hover:text-red-400 transition-colors"
+                                    >
+                                        Remove file
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                    </svg>
+                                    <div>
+                                        <p className="text-slate-300 font-medium">Drop your floor plan here</p>
+                                        <p className="text-sm text-slate-500 mt-1">or click to browse files</p>
+                                    </div>
                                 </>
                             )}
                         </div>
