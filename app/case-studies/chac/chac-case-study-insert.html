@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community Health Action Center Case Study | Digital Support Systems</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #ffffff;
+      --surface:  #f7f8fa;
+      --border:   #e4e6eb;
+      --text:     #1a1d23;
+      --muted:    #5a6072;
+      --accent:   #0057ff;
+      --accent-dk:#003db3;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 4rem 2rem 2.5rem;
+    }
+    .breadcrumb {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--accent); }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+    .intro {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 700px;
+      line-height: 1.75;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
+    }
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* ── PHOTO GALLERY ── */
+    .gallery {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
+    }
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      background: var(--surface);
+    }
+    .gallery-item.wide {
+      grid-column: span 2;
+      aspect-ratio: 16/7;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem 5rem;
+    }
+    .content section { margin-top: 3.5rem; }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.6rem;
+      letter-spacing: -0.015em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px solid var(--border);
+    }
+    h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 1.75rem 0 0.6rem;
+    }
+    p { color: var(--muted); margin-bottom: 0.85rem; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      padding-left: 1.25rem;
+      margin: 0.5rem 0 1rem;
+    }
+    ul li {
+      color: var(--muted);
+      margin-bottom: 0.45rem;
+      line-height: 1.6;
+    }
+    ul li strong { color: var(--text); }
+
+    .section-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 1.25rem 0;
+      display: block;
+    }
+
+    /* ── OUTCOME CARDS ── */
+    .outcome-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .outcome-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+    }
+    .outcome-card .icon { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .outcome-card strong { display: block; font-size: 0.9rem; color: var(--text); margin-bottom: 0.3rem; }
+    .outcome-card span { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── REFERENCE DOCS ── */
+    .ref-list { list-style: none; padding: 0; margin-top: 0.75rem; }
+    .ref-list li { margin-bottom: 0.4rem; }
+    .ref-list a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.9rem;
+    }
+    .ref-list a:hover { text-decoration: underline; }
+
+    @media (max-width: 700px) {
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .gallery-item.wide { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HERO
+     ═══════════════════════════════════════ -->
+<div class="hero">
+  <div class="breadcrumb">
+    <a href="/case-studies">Case Studies</a> &rsaquo; Community Health Action Center
+  </div>
+
+  <h1>Community Health Action Center</h1>
+
+  <p class="intro">
+    A professional multi-camera video production and unified conferencing system built
+    to support health education, community outreach, and hybrid collaboration. The
+    facility is equipped with broadcast-quality PTZ cameras, a hardware video switcher,
+    Zoom Rooms, and multi-platform conferencing capability — all tied together through
+    a structured AV control and distribution network.
+  </p>
+
+  <div class="tags">
+    <span class="tag">AV Systems Integration</span>
+    <span class="tag">Video Production</span>
+    <span class="tag">Unified Communications</span>
+    <span class="tag">Zoom Rooms</span>
+    <span class="tag">Network Infrastructure</span>
+    <span class="tag">PTZ Camera Systems</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     PHOTO GALLERY
+     Replace src="#" with your image paths.
+     ═══════════════════════════════════════ -->
+<div class="gallery">
+  <!-- Slot 1: Wide hero shot — production space or main room (spans 2 columns) -->
+  <div class="gallery-item wide">
+    <img src="#" alt="CHAC production space — wide view" />
+  </div>
+
+  <!-- Slot 2: Roland V-80HD switcher -->
+  <div class="gallery-item">
+    <img src="#" alt="Roland V-80HD video switcher" />
+  </div>
+
+  <!-- Slot 3: Sony SRG-X40 PTZ camera -->
+  <div class="gallery-item">
+    <img src="#" alt="Sony SRG-X40 PTZ camera" />
+  </div>
+
+  <!-- Slot 4: Samsung 98" display -->
+  <div class="gallery-item">
+    <img src="#" alt="Samsung 98-inch commercial display" />
+  </div>
+
+  <!-- Slot 5: Audio rack / Qu-16 mixer -->
+  <div class="gallery-item">
+    <img src="#" alt="Allen & Heath Qu-16 mixer and audio rack" />
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════ -->
+<div class="content">
+
+  <!-- PROJECT OVERVIEW -->
+  <section>
+    <h2>Project Overview</h2>
+    <p>
+      The Community Health Action Center needed a flexible, professional-grade AV system
+      capable of supporting live video production, recorded health education content, and
+      hybrid conference sessions — all from a single unified infrastructure. The goal was
+      to deliver a system that non-technical staff could confidently operate day-to-day,
+      while providing the depth and reliability required for broadcast-quality output.
+    </p>
+    <p>
+      Digital Support Systems designed and deployed a complete end-to-end solution:
+      multi-camera PTZ production through a Roland V-80HD hardware switcher, bidirectional
+      audio routing between the video switcher and a digital mixer, a Zoom Rooms-enabled
+      Intel NUC for conferencing, five Samsung commercial displays for audience and
+      operator feedback, and a managed network backbone supporting all IP-controlled devices.
+    </p>
+  </section>
+
+
+  <!-- DEPLOYMENT OBJECTIVES -->
+  <section>
+    <h2>Deployment Objectives</h2>
+    <p>Key objectives were established during the pre-deployment planning phase:</p>
+    <ul>
+      <li><strong>Multi-Camera PTZ Production:</strong> Deploy Sony SRG-X40 PTZ cameras with centralized joystick control (Sony RM-IP10) integrated into the Roland V-80HD for real-time program switching.</li>
+      <li><strong>Hardware Video Switching:</strong> Configure the Roland V-80HD as the central production hub, handling SDI/HDMI inputs, PGM/AUX outputs, audio embedding, and remote control via Roland RCS over IP.</li>
+      <li><strong>Zoom Rooms Conferencing:</strong> Deploy a licensed Zoom Rooms environment on an Intel NUC, fully integrated with the AV system for camera, audio, and display routing.</li>
+      <li><strong>Multi-Platform Conferencing:</strong> Support Microsoft Teams and Google Meet workflows from both the NUC (room system) and a presenter Dell laptop, with remote participant video routed back into the V-80HD as a switchable source.</li>
+      <li><strong>Professional Audio Routing:</strong> Establish bidirectional audio between the Roland V-80HD and an Allen &amp; Heath Qu-16 digital mixer via a Focusrite Scarlett 4i4 USB interface, with documented signal-chain protection against feedback loops.</li>
+      <li><strong>Commercial Display Infrastructure:</strong> Deploy five Samsung commercial displays (four 98" BE98D-H and one 75" BE75D-H) managed via Samsung MDC for centralized power, input, and display control.</li>
+      <li><strong>AV Distribution &amp; Control:</strong> Integrate an Extron IPCP Pro 250 control processor, Extron DA6 HD 4K distribution amplifier, and Magewell USB Capture HDMI 4K+ for signal distribution and capture.</li>
+      <li><strong>Managed Network Infrastructure:</strong> Build a dedicated AV subnet with a TP-Link PoE switch powering cameras and a Ubiquiti UniFi 7 Pro access point for wireless RCS and room management.</li>
+      <li><strong>iPad Room Management:</strong> Enable wireless control of Zoom Rooms and Roland RCS from an iPad, with domain-aware firewall rules to ensure reliable connectivity.</li>
+      <li><strong>Comprehensive Technical Documentation:</strong> Deliver a full client-handoff package including a master technical manual, multi-platform runbooks, network topology, credentials reference, and troubleshooting guides.</li>
+    </ul>
+  </section>
+
+
+  <!-- INFRASTRUCTURE DETAILS -->
+  <section>
+    <h2>Infrastructure Details</h2>
+
+    <h3>Video Production — Roland V-80HD</h3>
+    <p>
+      The Roland V-80HD serves as the production heart of the system. It accepts up to
+      eight inputs across SDI and HDMI, with PGM and AUX outputs feeding the display
+      distribution network. Camera presets and switcher control are managed via Roland
+      RCS software, accessible from both a Windows workstation and an iPad over the AV
+      LAN. The remote participant video feed from the conferencing laptop routes through
+      a Blackmagic HDMI-to-SDI converter and enters the switcher on SDI Input 1, making
+      it a fully switchable production source.
+    </p>
+
+    <!-- Replace src="#" with your routing diagram or switcher photo -->
+    <img class="section-img" src="#" alt="Roland V-80HD input/output routing diagram" />
+
+    <h3>PTZ Camera System — Sony SRG-X40</h3>
+    <p>
+      Sony SRG-X40 PTZ cameras provide wide-angle 4K coverage of the production space.
+      Cameras are PoE-powered from the TP-Link managed switch and controlled via the
+      Sony RM-IP10 joystick controller, with IP-based management available through each
+      camera's HTTP web interface. Preset positions for standard production shots were
+      programmed and stored on the RM-IP10.
+    </p>
+
+    <h3>Audio Routing — Qu-16 &amp; Focusrite Scarlett 4i4</h3>
+    <p>
+      The Allen &amp; Heath Qu-16 digital mixer handles all microphone inputs and
+      program audio for the room. A Focusrite Scarlett 4i4 USB audio interface bridges
+      the mixer and the Roland V-80HD, enabling the switcher to embed program audio into
+      its SDI/HDMI outputs and return conference audio back to the mixer for in-room
+      playback. Speaker output is driven by a Powersoft amplifier/DSP for professionally
+      tuned room audio.
+    </p>
+
+    <h3>Display Infrastructure — Samsung Commercial Displays</h3>
+    <p>
+      Five Samsung commercial displays — four 98" BE98D-H units and one 75" BE75D-H —
+      are deployed throughout the space for audience viewing, operator monitoring, and
+      confidence display. All five are managed centrally via Samsung MDC (Multiple
+      Display Control), allowing coordinated power control, input switching, and display
+      settings from a single workstation.
+    </p>
+
+    <!-- Replace src="#" with your room/display overview photo -->
+    <img class="section-img" src="#" alt="Samsung commercial display layout overview" />
+
+    <h3>Network Infrastructure</h3>
+    <p>
+      All AV devices reside on a dedicated subnet. The TP-Link TL-SG1218MP 18-port PoE
+      managed switch provides wired connectivity and powers the PTZ cameras. A Ubiquiti
+      UniFi 7 Pro access point delivers the wireless coverage required for iPad-based
+      RCS and Zoom Rooms controller access. Domain-profile Windows Firewall rules were
+      explicitly configured on the Intel NUC to permit TCP port 9090 traffic for the
+      Zoom Rooms iPad controller.
+    </p>
+
+    <h3>Control &amp; Capture</h3>
+    <p>
+      An Extron IPCP Pro 250 control processor provides programmatic AV control
+      integration. An Extron DA6 HD 4K distribution amplifier handles HDMI signal
+      distribution to multiple displays. A Magewell USB Capture HDMI 4K+ captures
+      the program output from the switcher for recording or streaming workflows.
+    </p>
+  </section>
+
+
+  <!-- OUTCOMES -->
+  <section>
+    <h2>Outcomes</h2>
+    <p>
+      The completed system gives the Community Health Action Center a professional,
+      operator-friendly AV production environment capable of supporting live events,
+      recorded content, and hybrid conferencing — all from a single unified infrastructure.
+    </p>
+
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <div class="icon">🎥</div>
+        <strong>Broadcast-Quality Production</strong>
+        <span>Multi-camera PTZ switching with hardware-grade reliability for live and recorded programs.</span>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">🤝</div>
+        <strong>Unified Conferencing</strong>
+        <span>Zoom Rooms, Microsoft Teams, and Google Meet fully integrated into the AV signal chain.</span>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">🔊</div>
+        <strong>Professional Audio</strong>
+        <span>Bidirectional audio routing between mixer and switcher with documented feedback-loop protection.</span>
+      </div>
+      <div class="outcome-card">
+        <div class="icon">📋</div>
+        <strong>Client-Ready Documentation</strong>
+        <span>Full technical manual, platform runbooks, network diagrams, and operator guides delivered at handoff.</span>
+      </div>
+    </div>
+
+    <h3>Reference Documents</h3>
+    <ul class="ref-list">
+      <li><a href="#">CHAC Video Production System — Master Technical Manual (PDF)</a></li>
+      <li><a href="#">Multi-Platform Conferencing Runbook (PDF)</a></li>
+      <li><a href="#">Network Topology Diagram (PDF)</a></li>
+    </ul>
+  </section>
+
+</div><!-- /content -->
+
+</body>
+</html>

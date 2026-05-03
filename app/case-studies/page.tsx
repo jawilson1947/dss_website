@@ -36,6 +36,17 @@ const cases = [
     ]
   },
   {
+    title: "Community Health Action Center",
+    summary: "Professional multi-camera video production and unified conferencing system for health education and hybrid collaboration.",
+    href: "/case-studies/chac",
+    details: [
+      "Challenge: Deliver broadcast-quality live production, recorded content, and hybrid conferencing from a single unified infrastructure.",
+      "Solution: Roland V-80HD switcher, Sony SRG-X40 PTZ cameras, Zoom Rooms on Intel NUC, Allen & Heath Qu-16 audio, and five Samsung commercial displays.",
+      "Technology: Roland V-80HD, Sony PTZ, Zoom Rooms, Allen & Heath Qu-16, Samsung MDC, Extron, Ubiquiti",
+      "Outcome: Operator-friendly AV production environment with full client documentation package."
+    ]
+  },
+  {
     title: "Alexa controlled \"Zoom Room\" using Shure Technologies",
     summary: "Network-centric AV-over-IP Zoom Room built around Dante-enabled audio and AI-driven camera systems.",
     href: "/case-studies/alexa-zoom-room",
